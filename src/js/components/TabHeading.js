@@ -1,3 +1,5 @@
+import React, { PropTypes } from 'react';
+
 export const TabHeading = ({
     title,
     onClick
@@ -13,4 +15,8 @@ export const TabHeading = ({
             {title}
         </a>
     )
+};
+
+TabHeading.propTypes = {
+    title: PropTypes.string.isRequired
 };
