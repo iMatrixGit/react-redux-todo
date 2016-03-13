@@ -1,0 +1,15 @@
+export const ADD_TAB = 'ADD_TAB';
+export const REMOVE_TAB = 'REMOVE_TAB';
+export const TOGGLE_TAB = 'TOGGLE_TAB';
+export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
+export const SELECT_SUBREDDIT = 'SELECT_SUBREDDIT';
+export const INVALIDATE_SUBREDDIT = 'INVALIDATE_SUBREDDIT';
+export const REQUEST_POSTS  = 'REQUEST_POSTS';
+export const RECEIVE_POSTS  = 'RECEIVE_POSTS';
+
+export const VisibilityFilters = {
+    SHOW_ALL: 'SHOW_ALL',
+    SHOW_ACTIVE: 'SHOW_ACTIVE',
+    SHOW_INACTIVE: 'SHOW_INACTIVE'
+};
+

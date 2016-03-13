@@ -1,0 +1,24 @@
+{
+  "frontend": {
+    "items": [
+      {
+        "id": 1,
+        "title": "Front end 1 title",
+        "content": "Front end 1 content",
+        "active": false
+      },
+      {
+        "id": 2,
+        "title": "Front end 2 title",
+        "content": "Front end 2 content",
+        "active": false
+      },
+      {
+        "id": 3,
+        "title": "Front end 3 title",
+        "content": "Front end 3 content",
+        "active": true
+      }
+    ]
+  }
+}
