@@ -6,7 +6,7 @@ export const RemTabBtn = ({
     return (
         <span className="btn-remove"
               onClick={onClick}>
-            Remove 123
+            Remove
         </span>
     )
 };

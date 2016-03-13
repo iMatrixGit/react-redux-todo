@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
+    "startDev": "node server.js",
     "test": "mocha ./src/**/*.spec.js -w --compilers js:babel-core/register"
   },
   "babel": {
     "presets": [
-      "es2015"
+      "es2015",
+      "react"
     ],
     "plugins": [
       "transform-object-rest-spread"
