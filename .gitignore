@@ -1,0 +1,7 @@
+*.un~
+*.sw*
+/node_modules
+/.idea
+/npm-debug.log
+/dist
+/artifact
