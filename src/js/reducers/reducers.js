@@ -110,45 +110,47 @@ export const selectedSubredit = (state = 'reactjs', action) => {
 };
 
 
-export const tabs = (state = {}, action) => {
+export const posts = (state = {}, action) => {
 
     switch(action.type){
 
         case TOGGLE_TAB:
             return {
-                    ...state.posts,
+                    ...state,
                     items:  toggleTab(state.items, action)
                 };
 
         case ADD_TAB:
             return {
-                    ...state.posts,
+                    ...state,
                     items: addTab(state.items, action)
                 };
 
         case REMOVE_TAB:
             return {
-                    ...state.posts,
+                    ...state,
                     items: removeTab(state.items, action)
                 };
 
-
         case SET_VISIBILITY_FILTER:
             return {
-                ...state.posts,
+                ...state,
                 items: getItemsByFilter(state.items, action.visibilityFilter)
             };
+
         case INVALIDATE_SUBREDDIT:
             return {
-                ...state.posts,
+                ...state,
                 didInvalidate: true
             };
+
         case REQUEST_POSTS:
             return {
-                ...state.posts,
+                ...state,
                 didInvalidate: true,
                 isFetching: true
             };
+
         case RECEIVE_POSTS:
             return {
                 isFetching: false,
@@ -161,12 +163,15 @@ export const tabs = (state = {}, action) => {
     }
 };
 
-export const tabsApp = (state = {}, action) => {
+export const mainReducer = (state = {}, action) => {
 
     return {
-        selectedSubreddit: state.selectedSubreddit,
-        filters: state.filters,
+        ...state,
+        selectedSubreddit: selectedSubredit(state.selectedSubreddit, action),
         visibilityFilter: visibilityFilter(state.visibilityFilter, action),
-        posts: tabs(state.posts, action)
-    }
+        posts: {
+            ...state.posts,
+            [state.selectedSubreddit]: posts(state.posts[state.selectedSubreddit], action)
+        }
+    };
 };

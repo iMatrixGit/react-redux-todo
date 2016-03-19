@@ -2,7 +2,9 @@ import React, { PropTypes } from 'react';
 import {
     AddTabContainer,
     TabFilterContainer,
-    InteractiveTabList } from './containers';
+    InteractiveTabList,
+    SubredditFilterContainer
+} from './containers';
 
 import { fetchPosts } from '../actions/actions'
 
@@ -11,7 +13,7 @@ export class AppContainer extends React.Component {
     componentWillMount(){
         console.log("WillMount");
         const {store} = this.context;
-        store.dispatch(fetchPosts('frontend'));
+        store.dispatch(fetchPosts('backend'));
     }
 
     componentDidMount(){
@@ -31,6 +33,7 @@ export class AppContainer extends React.Component {
             <div>
                 <AddTabContainer />
                 <TabFilterContainer />
+                <SubredditFilterContainer />
                 <InteractiveTabList />
             </div>
         )

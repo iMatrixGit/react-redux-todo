@@ -98,8 +98,22 @@ export const fetchPosts = (subreddit) => {
         return fetch('../../../data.json').then((response) =>
             response.json()
         ).then((json) => {
+            dispatch(selectSubredditAction(subreddit));
             dispatch(receivePostsAction(subreddit, json[subreddit]))
         })
+    }
+};
+
+export const fetchPostsIfNeeded = (subreddit) => {
+
+    return (dispatch, getState) => {
+
+        if(!getState().posts[subreddit].items.length){
+            dispatch(fetchPosts(subreddit))
+        } else {
+            dispatch(selectSubredditAction(subreddit));
+            return Promise.resolve();
+        }
     }
 };
 

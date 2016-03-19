@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { tabsApp } from './reducers/reducers'
+import { mainReducer } from './reducers/reducers'
 import { logger } from './actions/actions';
 import {
     createStore ,
@@ -20,30 +20,21 @@ let initialState = {
     filters: [
         ...filters
     ],
+    subreddits: [
+        'frontend',
+        'backend'
+    ],
     posts: {
-        isFetching: false,
-        didInvalidate: false,
-        items: [
-            {
-                id: 1,
-                title: "First Tab",
-                content: "The first tab content",
-                active: false
-            },
-            {
-                id: 2,
-                title: "Second Tab",
-                content: "The second tab content",
-                active: true
-            },
-            {
-                id: 3,
-                title: "Third Tab",
-                content: "The third tab content",
-                active: false
-            }
-        ]
-
+        frontend: {
+            isFetching: false,
+            didInvalidate: false,
+            items: []
+        },
+        backend: {
+            isFetching: false,
+            didInvalidate: false,
+            items: []
+        }
     }
 };
 
@@ -56,7 +47,7 @@ function configureStore(initialState, reducer, ...middlewares) {
 
 // App
 
-const store = configureStore(initialState, tabsApp, logger, thunk);
+const store = configureStore(initialState, mainReducer, logger, thunk);
 
 ReactDOM.render(
     <Provider store={store}>

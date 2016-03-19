@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
-export const TabFilter = ({
-    activeFilter,
-    filters,
+export const Select = ({
+    activeOption,
+    options,
     onChange
     }) => {
 
@@ -11,11 +11,11 @@ export const TabFilter = ({
     return (
         <select ref={ node => select = node }
                 className="form-input"
-                value={activeFilter}
+                value={activeOption}
                 onChange={() => onChange(select.value)}
         >
             {
-                filters.map((filter, index) => (
+                options.map((filter, index) => (
                     <option value={filter} key={index}>
                         {filter}
                     </option>
@@ -25,8 +25,8 @@ export const TabFilter = ({
     )
 };
 
-TabFilter.propTypes = {
-    activeFilter: PropTypes.string.isRequired,
-    filters: PropTypes.array.isRequired,
+Select.propTypes = {
+    activeOption: PropTypes.string.isRequired,
+    options: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired
 };
