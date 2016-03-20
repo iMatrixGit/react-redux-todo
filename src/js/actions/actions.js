@@ -93,12 +93,12 @@ export const fetchPosts = (subreddit) => {
 
     return dispatch => {
 
+        dispatch(selectSubredditAction(subreddit));
         dispatch(requestPostsAction(subreddit));
 
         return fetch('../../../data.json').then((response) =>
             response.json()
         ).then((json) => {
-            dispatch(selectSubredditAction(subreddit));
             dispatch(receivePostsAction(subreddit, json[subreddit]))
         })
     }

@@ -15,7 +15,7 @@ import { AppContainer } from './containers/AppContainer';
 let filters = Object.keys(VisibilityFilters);
 
 let initialState = {
-    selectedSubreddit: 'frontend',
+    selectedSubreddit: 'backend',
     visibilityFilter: 'SHOW_ALL',
     filters: [
         ...filters
