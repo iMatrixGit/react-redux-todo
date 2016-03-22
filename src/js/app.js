@@ -1,6 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { mainReducer } from './reducers/reducers'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Immutable from 'immutable';
+import { mainReducer } from './reducers/reducers';
 import { logger } from './actions/actions';
 import {
     createStore ,
@@ -17,23 +18,21 @@ let filters = Object.keys(VisibilityFilters);
 let initialState = {
     selectedSubreddit: 'backend',
     visibilityFilter: 'SHOW_ALL',
-    filters: [
-        ...filters
-    ],
-    subreddits: [
+    filters: Immutable.List(filters),
+    subreddits: Immutable.List([
         'frontend',
         'backend'
-    ],
+    ]),
     posts: {
         frontend: {
             isFetching: false,
             didInvalidate: false,
-            items: []
+            items: Immutable.List()
         },
         backend: {
             isFetching: false,
             didInvalidate: false,
-            items: []
+            items: Immutable.List()
         }
     }
 };

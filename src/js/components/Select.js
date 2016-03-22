@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Immutable from 'immutable';
 
 export const Select = ({
     activeOption,
@@ -27,6 +28,6 @@ export const Select = ({
 
 Select.propTypes = {
     activeOption: PropTypes.string.isRequired,
-    options: PropTypes.array.isRequired,
+    options: PropTypes.instanceOf(Immutable.List),
     onChange: PropTypes.func.isRequired
 };

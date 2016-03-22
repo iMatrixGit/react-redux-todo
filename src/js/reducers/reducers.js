@@ -1,3 +1,4 @@
+import Immutable from 'immutable';
 import {
     ADD_TAB,
     REMOVE_TAB,
@@ -27,11 +28,9 @@ export const toggleTab = (state = [], action) => {
 
             return state.map((tab) => {
 
-                if (tab.active || tab.id === action.id) {
+                if (tab.get('active') || tab.get('id') === action.id) {
 
-                    return Object.assign({}, tab, {
-                        active: !tab.active
-                    });
+                    return tab.update('active', (val) => !val);
 
                 } else {
 
@@ -45,17 +44,17 @@ export const toggleTab = (state = [], action) => {
     }
 };
 
-export const addTab = (state = [], action) => {
+export const addTab = (state = Immutable.List(), action) => {
 
     switch (action.type) {
         case ADD_TAB:
-            return state.concat({
-                id: state.length > 0 ? state[state.length - 1].id + 1 : 1,
+            return state.push(Immutable.Map({
+                id: state.size > 0 ? state.get(state.size - 1).get('id') + 1 : 1,
                 title: action.payload.title,
                 content: action.payload.content,
                 active: false
 
-            });
+            }));
         default:
             return state;
     }
@@ -65,11 +64,11 @@ export const removeTab = (state = [], action) => {
 
     switch (action.type) {
         case REMOVE_TAB:
-            return state.filter((item) => item.id != action.payload.id)
+            return state.filter((item) => item.get('id') != action.payload.id)
     }
 };
 
-export const getItemsByFilter = (state = [], visibilityFilter = 'DEFAULT_FILTER') => {
+export const getItemsByFilter = (state = Immutable.List(), visibilityFilter = 'DEFAULT_FILTER') => {
 
     switch (visibilityFilter){
 
@@ -77,10 +76,10 @@ export const getItemsByFilter = (state = [], visibilityFilter = 'DEFAULT_FILTER'
             return state.slice();
 
         case SHOW_ACTIVE:
-            return state.filter((tab) => tab.active);
+            return state.filter((tab) => tab.get('active'));
 
         case SHOW_INACTIVE:
-            return state.filter((tab) => !tab.active);
+            return state.filter((tab) => !tab.get('active'));
 
         default:
             return state;
@@ -155,7 +154,7 @@ export const posts = (state = {}, action) => {
             return {
                 isFetching: false,
                 didInvalidate: false,
-                items: action.items
+                items: Immutable.List(action.items.map((item) => Immutable.Map(item)))
             };
 
         default:
