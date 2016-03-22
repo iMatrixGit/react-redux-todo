@@ -1,38 +1,39 @@
 import expect from 'expect';
-import { tabs, addTab, toggleTab } from '../reducers/reducers';
+import Immutable from 'Immutable'
+import { posts, addTab, toggleTab } from '../reducers/reducers';
 
 describe('reducers toggleTab', () => {
 
     it('Should return new state with changed active prop', () => {
 
         const stateBefore = [
-                {
+                Immutable.Map({
                     id: 1,
                     title: "First Tab",
                     content: "The first tab content",
                     active: false
-                },
-                {
+                }),
+                Immutable.Map({
                     id: 2,
                     title: "Second Tab",
                     content: "The second tab content",
                     active: true
-                }
+                })
             ];
 
         const stateAfter = [
-                {
-                    id: 1,
-                    title: "First Tab",
-                    content: "The first tab content",
-                    active: true
-                },
-                {
+                Immutable.Map({
+                        id: 1,
+                        title: "First Tab",
+                        content: "The first tab content",
+                        active: true
+                    }),
+                Immutable.Map({
                     id: 2,
                     title: "Second Tab",
                     content: "The second tab content",
                     active: false
-                }
+                })
             ];
 
         const action = {
@@ -42,47 +43,43 @@ describe('reducers toggleTab', () => {
 
         expect(toggleTab(stateBefore, action)).toEqual(stateAfter);
     });
-});
-
-describe('reducers addTab', () => {
 
     it('Should return state with added tab', () => {
 
         const stateBefore = [
-            {
+            Immutable.Map({
                 id: 1,
                 title: "First Tab",
                 content: "The first tab content",
-                active: true
-            },
-            {
+                active: false
+            }),
+            Immutable.Map({
                 id: 2,
                 title: "Second Tab",
                 content: "The second tab content",
-                active: false
-            }
+                active: true
+            })
         ];
 
         const stateAfter = [
-            {
+            Immutable.Map({
                 id: 1,
                 title: "First Tab",
                 content: "The first tab content",
-                active: true
-            },
-            {
+                active: false
+            }),
+            Immutable.Map({
                 id: 2,
                 title: "Second Tab",
                 content: "The second tab content",
-                active: false
-            },
-            {
+                active: true
+            }),
+            Immutable.Map({
                 id: 3,
                 title: "Third Tab",
                 content: "The third tab content",
                 active: false
-            }
-
+            })
         ];
 
         const action = {
@@ -93,92 +90,9 @@ describe('reducers addTab', () => {
             }
         };
 
-        expect(addTab(stateBefore, action)).toEqual(stateAfter);
+        expect(addTab(stateBefore, action).map((val) => val.toJS())).toEqual(stateAfter.map((val) => val.toJS()));
 
     });
-});
-
-describe('reducers tabs', () => {
-
-    describe('ADD_TAB', () => {
-
-        it('Should return updated tabs list with added tab', () => {
-
-            const stateBefore = {};
-
-            const stateAfter = {
-
-                tabs: [
-                    {
-                        id: 1,
-                        title: "The first tab",
-                        content: "The first tab content",
-                        active: false
-                    }
-                ]
-            };
-
-            const action = {
-                type: 'ADD_TAB',
-                payload: {
-                    title: "The first tab",
-                    content: "The first tab content"
-                }
-            };
-
-            expect(tabs(stateBefore, action)).toEqual(stateAfter);
-        });
-    });
-
-    describe('TOGGLE_TAB', () => {
-
-        it('Should return updated tabs list', () => {
-
-            const stateBefore = {
-                tabs:[
-                    {
-                        id: 1,
-                        title: "First Tab",
-                        content: "The first tab content",
-                        active: false
-                    },
-                    {
-                        id: 2,
-                        title: "Second Tab",
-                        content: "The second tab content",
-                        active: true
-                    }
-                ]
-            };
-
-            const stateAfter = {
-                tabs:[
-                    {
-                        id: 1,
-                        title: "First Tab",
-                        content: "The first tab content",
-                        active: true
-                    },
-                    {
-                        id: 2,
-                        title: "Second Tab",
-                        content: "The second tab content",
-                        active: false
-                    }
-                ]
-            };
-
-            const action = {
-                type: 'TOGGLE_TAB',
-                id: 1
-            };
-
-            expect(tabs(stateBefore, action)).toEqual(stateAfter);
-        });
-    });
-
-
-
 });
 
 

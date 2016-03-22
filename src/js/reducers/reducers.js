@@ -44,12 +44,12 @@ export const toggleTab = (state = [], action) => {
     }
 };
 
-export const addTab = (state = Immutable.List(), action) => {
+export const addTab = (state = [], action) => {
 
     switch (action.type) {
         case ADD_TAB:
-            return state.push(Immutable.Map({
-                id: state.size > 0 ? state.get(state.size - 1).get('id') + 1 : 1,
+            return state.concat(Immutable.Map({
+                id: state.length > 0 ? state[state.length - 1].get('id') + 1 : 1,
                 title: action.payload.title,
                 content: action.payload.content,
                 active: false
@@ -68,7 +68,7 @@ export const removeTab = (state = [], action) => {
     }
 };
 
-export const getItemsByFilter = (state = Immutable.List(), visibilityFilter = 'DEFAULT_FILTER') => {
+export const getItemsByFilter = (state = [], visibilityFilter = 'DEFAULT_FILTER') => {
 
     switch (visibilityFilter){
 
@@ -154,7 +154,7 @@ export const posts = (state = {}, action) => {
             return {
                 isFetching: false,
                 didInvalidate: false,
-                items: Immutable.List(action.items.map((item) => Immutable.Map(item)))
+                items: action.items.map((item) => Immutable.Map(item))
             };
 
         default:

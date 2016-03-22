@@ -27,12 +27,12 @@ let initialState = {
         frontend: {
             isFetching: false,
             didInvalidate: false,
-            items: Immutable.List()
+            items: []
         },
         backend: {
             isFetching: false,
             didInvalidate: false,
-            items: Immutable.List()
+            items: []
         }
     }
 };
