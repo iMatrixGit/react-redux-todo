@@ -20,7 +20,7 @@ const {
 
 // Reducers
 
-export const toggleTab = (state = [], action) => {
+export const toggleTab = (state = Immutable.List(), action) => {
 
     switch(action.type){
 
@@ -44,12 +44,12 @@ export const toggleTab = (state = [], action) => {
     }
 };
 
-export const addTab = (state = [], action) => {
+export const addTab = (state = Immutable.List(), action) => {
 
     switch (action.type) {
         case ADD_TAB:
-            return state.concat(Immutable.Map({
-                id: state.length > 0 ? state[state.length - 1].get('id') + 1 : 1,
+            return state.push(Immutable.Map({
+                id: state.size > 0 ? state.last().get('id') + 1 : 1,
                 title: action.payload.title,
                 content: action.payload.content,
                 active: false
@@ -154,7 +154,7 @@ export const posts = (state = {}, action) => {
             return {
                 isFetching: false,
                 didInvalidate: false,
-                items: action.items.map((item) => Immutable.Map(item))
+                items: Immutable.List(action.items.map((item) => Immutable.Map(item)))
             };
 
         default:

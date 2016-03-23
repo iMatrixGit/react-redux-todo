@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Immutable from 'immutable';
 import { mainReducer } from './reducers/reducers';
 import { logger } from './actions/actions';
+import Perf from 'react-addons-perf';
 import {
     createStore ,
     combineReducers,
@@ -27,12 +28,12 @@ let initialState = {
         frontend: {
             isFetching: false,
             didInvalidate: false,
-            items: []
+            items: Immutable.List()
         },
         backend: {
             isFetching: false,
             didInvalidate: false,
-            items: []
+            items: Immutable.List()
         }
     }
 };
@@ -48,9 +49,15 @@ function configureStore(initialState, reducer, ...middlewares) {
 
 const store = configureStore(initialState, mainReducer, logger, thunk);
 
+Perf.start();
+
 ReactDOM.render(
     <Provider store={store}>
         <AppContainer />
     </Provider>,
     document.getElementById('app')
 );
+
+Perf.stop();
+Perf.printInclusive();
+Perf.printWasted();

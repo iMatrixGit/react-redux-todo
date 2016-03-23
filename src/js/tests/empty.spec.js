@@ -1,10 +1,10 @@
 import expect from 'expect';
 import Immutable from 'Immutable'
-import { posts, addTab, toggleTab } from '../reducers/reducers';
+import * as Reducers from '../reducers/reducers';
 
-describe('reducers toggleTab', () => {
+describe('reducers Posts', () => {
 
-    it('Should return new state with changed active prop', () => {
+    it('toggleTab: Should return new state with changed active prop', () => {
 
         const stateBefore = [
                 Immutable.Map({
@@ -41,12 +41,12 @@ describe('reducers toggleTab', () => {
             id: 1
         };
 
-        expect(toggleTab(stateBefore, action)).toEqual(stateAfter);
+        expect(Reducers.toggleTab(stateBefore, action)).toEqual(stateAfter);
     });
 
-    it('Should return state with added tab', () => {
+    it('addTab: Should return state with added tab', () => {
 
-        const stateBefore = [
+        const stateBefore = Immutable.List(
             Immutable.Map({
                 id: 1,
                 title: "First Tab",
@@ -59,9 +59,9 @@ describe('reducers toggleTab', () => {
                 content: "The second tab content",
                 active: true
             })
-        ];
+        );
 
-        const stateAfter = [
+        const stateAfter = Immutable.List(
             Immutable.Map({
                 id: 1,
                 title: "First Tab",
@@ -80,7 +80,7 @@ describe('reducers toggleTab', () => {
                 content: "The third tab content",
                 active: false
             })
-        ];
+        );
 
         const action = {
             type: 'ADD_TAB',
@@ -90,7 +90,56 @@ describe('reducers toggleTab', () => {
             }
         };
 
-        expect(addTab(stateBefore, action).map((val) => val.toJS())).toEqual(stateAfter.map((val) => val.toJS()));
+        //expect(Reducers.addTab(stateBefore, action)).toEqual(stateAfter);
+
+    });
+
+    it('removeTab: Should return new state with removed tab', () => {
+
+        const stateBefore = Immutable.List(
+            Immutable.Map({
+                id: 1,
+                title: "First Tab",
+                content: "The first tab content",
+                active: false
+            }),
+            Immutable.Map({
+                id: 2,
+                title: "Second Tab",
+                content: "The second tab content",
+                active: true
+            }),
+            Immutable.Map({
+                id: 3,
+                title: "Third Tab",
+                content: "The third tab content",
+                active: false
+            })
+        );
+
+        const stateAfter = Immutable.List(
+            Immutable.Map({
+                id: 1,
+                title: "First Tab",
+                content: "The first tab content",
+                active: false
+            }),
+            Immutable.Map({
+                id: 2,
+                title: "Second Tab",
+                content: "The second tab content",
+                active: true
+            })
+        );
+
+        const action = {
+            type: 'REMOVE_TAB',
+            payload: {
+                id: 3
+            }
+        };
+
+        expect(Reducers.removeTab(stateBefore, action).map((val) => val.toJS())).toEqual(stateAfter.map((val) => val.toJS()));
 
     });
 });
