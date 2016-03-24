@@ -68,7 +68,7 @@ export const removeTab = (state = [], action) => {
     }
 };
 
-export const getItemsByFilter = (state = [], visibilityFilter = 'DEFAULT_FILTER') => {
+export const getItemsByFilter = (state = Immutable.List(), visibilityFilter = 'DEFAULT_FILTER') => {
 
     switch (visibilityFilter){
 
