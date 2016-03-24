@@ -108,7 +108,7 @@ export const fetchPostsIfNeeded = (subreddit) => {
 
     return (dispatch, getState) => {
 
-        if(!getState().posts[subreddit].items.length){
+        if(!getState().posts[subreddit].get('items').size){
             dispatch(fetchPosts(subreddit))
         } else {
             dispatch(selectSubredditAction(subreddit));

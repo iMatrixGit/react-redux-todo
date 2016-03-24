@@ -114,48 +114,33 @@ export const posts = (state = {}, action) => {
     switch(action.type){
 
         case TOGGLE_TAB:
-            return {
-                    ...state,
-                    items:  toggleTab(state.items, action)
-                };
+            return state.update('items', (val) => toggleTab(val, action));
 
         case ADD_TAB:
-            return {
-                    ...state,
-                    items: addTab(state.items, action)
-                };
+            return state.update('items', (val) => addTab(val, action));
 
         case REMOVE_TAB:
-            return {
-                    ...state,
-                    items: removeTab(state.items, action)
-                };
+            return state.update('items', (val) => removeTab(val, action));
 
         case SET_VISIBILITY_FILTER:
-            return {
-                ...state,
-                items: getItemsByFilter(state.items, action.visibilityFilter)
-            };
+            return state.update('items', (val) => getItemsByFilter(val, action.visibilityFilter));
 
         case INVALIDATE_SUBREDDIT:
-            return {
-                ...state,
-                didInvalidate: true
-            };
+            return state.set('didInvalidate', true);
 
         case REQUEST_POSTS:
-            return {
+            return Immutable.Map({
                 ...state,
                 didInvalidate: true,
                 isFetching: true
-            };
+            });
 
         case RECEIVE_POSTS:
-            return {
+            return Immutable.Map({
                 isFetching: false,
                 didInvalidate: false,
                 items: Immutable.List(action.items.map((item) => Immutable.Map(item)))
-            };
+            });
 
         default:
             return state;

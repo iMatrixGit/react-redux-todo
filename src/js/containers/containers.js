@@ -18,7 +18,7 @@ import { getItemsByFilter } from '../reducers/reducers';
 
 const mapTabStateToProps = (state) => {
     return {
-        tabs: state.posts[state.selectedSubreddit].items
+        tabs: state.posts[state.selectedSubreddit].get('items')
     }
 };
 
@@ -63,7 +63,7 @@ export const TabFilterContainer = connect(
 const mapStateToProps = (state) => {
 
     return {
-        tabs: getItemsByFilter(state.posts[state.selectedSubreddit].items, state.visibilityFilter)
+        tabs: getItemsByFilter(state.posts[state.selectedSubreddit].get('items'), state.visibilityFilter)
     };
 };
 

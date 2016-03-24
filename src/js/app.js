@@ -25,16 +25,16 @@ let initialState = {
         'backend'
     ]),
     posts: {
-        frontend: {
+        frontend: Immutable.Map({
             isFetching: false,
             didInvalidate: false,
             items: Immutable.List()
-        },
-        backend: {
+        }),
+        backend: Immutable.Map({
             isFetching: false,
             didInvalidate: false,
             items: Immutable.List()
-        }
+        })
     }
 };
 
