@@ -20,6 +20,6 @@ export const SearchInput = ({
 };
 
 SearchInput.propTypes = {
-    filterText: PropTypes.string,
-    onChange: PropTypes.func
+    filterText: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired
 };
