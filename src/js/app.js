@@ -19,12 +19,13 @@ let filters = Object.keys(VisibilityFilters);
 let initialState = {
     selectedSubreddit: 'backend',
     visibilityFilter: 'SHOW_ALL',
+    filterText: '',
     filters: Immutable.List(filters),
     subreddits: Immutable.List([
         'frontend',
         'backend'
     ]),
-    posts: {
+    posts: Immutable.Map({
         frontend: Immutable.Map({
             isFetching: false,
             didInvalidate: false,
@@ -35,7 +36,7 @@ let initialState = {
             didInvalidate: false,
             items: Immutable.List()
         })
-    }
+    })
 };
 
 function configureStore(initialState, reducer, ...middlewares) {

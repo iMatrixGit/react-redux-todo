@@ -4,21 +4,23 @@ import { Tab } from '../components/Tab';
 import { AddTab } from '../components/AddTab';
 import { Select } from '../components/Select';
 import { TabList } from '../components/TabList';
+import { SearchInput } from '../components/SearchInput';
 import {
     toggleTabAction,
     removeTabAction,
     changeFilterAction,
     selectSubredditAction,
-    fetchPostsIfNeeded
+    fetchPostsIfNeeded,
+    searchPostAction
 } from '../actions/actions';
 
-import { getItemsByFilter } from '../reducers/reducers';
+import { getItemsByFilter, getItemsByFilterText } from '../reducers/reducers';
 
 // Interactive tab container
 
 const mapTabStateToProps = (state) => {
     return {
-        tabs: state.posts[state.selectedSubreddit].get('items')
+        tabs: state.posts.getIn([state.selectedSubreddit, 'items'])
     }
 };
 
@@ -63,7 +65,12 @@ export const TabFilterContainer = connect(
 const mapStateToProps = (state) => {
 
     return {
-        tabs: getItemsByFilter(state.posts[state.selectedSubreddit].get('items'), state.visibilityFilter)
+        tabs: getItemsByFilterText(
+            getItemsByFilter(
+                state.posts.getIn([state.selectedSubreddit, 'items']),
+                state.visibilityFilter),
+                state.filterText
+            )
     };
 };
 
@@ -74,6 +81,25 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 };
+
+// Search input container
+
+const mapSearchStateToProps = (state) => {
+    return {
+        filterText: state.filterText
+    }
+};
+
+const mapSearchDispatchToProps = (dispatch) => {
+    return {
+        onChange: (text) => dispatch(searchPostAction(text))
+    }
+};
+
+export const SearchInputContainer = connect(
+    mapSearchStateToProps,
+    mapSearchDispatchToProps
+)(SearchInput);
 
 export const InteractiveTabList = connect(
     mapStateToProps,

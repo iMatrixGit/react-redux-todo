@@ -8,6 +8,7 @@ import {
     INVALIDATE_SUBREDDIT,
     REQUEST_POSTS,
     RECEIVE_POSTS,
+    SEARCH_POSTS,
     VisibilityFilters
 } from '../constants/constants'
 
@@ -60,7 +61,7 @@ export const addTab = (state = Immutable.List(), action) => {
     }
 };
 
-export const removeTab = (state = [], action) => {
+export const removeTab = (state = Immutable.List(), action) => {
 
     switch (action.type) {
         case REMOVE_TAB:
@@ -86,6 +87,11 @@ export const getItemsByFilter = (state = Immutable.List(), visibilityFilter = 'D
     }
 };
 
+export const getItemsByFilterText = (state = Immutable.List(), filterText = '') => {
+
+    return state.filter((val) => val.get('title').indexOf(filterText) >= 0);
+};
+
 export const visibilityFilter = (state = SHOW_ALL, action) => {
 
     switch (action.type){
@@ -108,8 +114,20 @@ export const selectedSubredit = (state = 'reactjs', action) => {
     }
 };
 
+export const setFilterText = (state = '', action) => {
 
-export const posts = (state = {}, action) => {
+    switch (action.type){
+
+        case SEARCH_POSTS:
+            return action.payload.filterText;
+
+        default:
+            return state;
+    }
+};
+
+
+export const posts = (state = Immutable.Map(), action) => {
 
     switch(action.type){
 
@@ -121,9 +139,6 @@ export const posts = (state = {}, action) => {
 
         case REMOVE_TAB:
             return state.update('items', (val) => removeTab(val, action));
-
-        case SET_VISIBILITY_FILTER:
-            return state.update('items', (val) => getItemsByFilter(val, action.visibilityFilter));
 
         case INVALIDATE_SUBREDDIT:
             return state.set('didInvalidate', true);
@@ -147,15 +162,15 @@ export const posts = (state = {}, action) => {
     }
 };
 
-export const mainReducer = (state = {}, action) => {
+export const mainReducer = (state = Immutable.Map(), action) => {
 
     return {
         ...state,
         selectedSubreddit: selectedSubredit(state.selectedSubreddit, action),
         visibilityFilter: visibilityFilter(state.visibilityFilter, action),
-        posts: {
-            ...state.posts,
-            [state.selectedSubreddit]: posts(state.posts[state.selectedSubreddit], action)
-        }
+        filterText: setFilterText(state.filterText, action),
+        posts: state.posts.update(
+            state.selectedSubreddit,
+            (val) => posts(state.posts.get(state.selectedSubreddit), action))
     };
 };

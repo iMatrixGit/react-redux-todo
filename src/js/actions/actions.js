@@ -8,6 +8,7 @@ import {
     INVALIDATE_SUBREDDIT,
     REQUEST_POSTS,
     RECEIVE_POSTS,
+    SEARCH_POSTS,
     VisibilityFilters
 } from '../constants/constants';
 
@@ -75,6 +76,15 @@ export const receivePostsAction = (subreddit, posts) => {
     }
 };
 
+export const searchPostAction = (filterText) => {
+    return {
+        type: SEARCH_POSTS,
+        payload: {
+            filterText
+        }
+    }
+};
+
 // Middleware
 
 export const addTabIfValid =  (title, content) => {
@@ -108,7 +118,7 @@ export const fetchPostsIfNeeded = (subreddit) => {
 
     return (dispatch, getState) => {
 
-        if(!getState().posts[subreddit].get('items').size){
+        if(!getState().posts.getIn([subreddit, 'items']).size){
             dispatch(fetchPosts(subreddit))
         } else {
             dispatch(selectSubredditAction(subreddit));

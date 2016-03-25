@@ -3,9 +3,9 @@ import {
     AddTabContainer,
     TabFilterContainer,
     InteractiveTabList,
-    SubredditFilterContainer
+    SubredditFilterContainer,
+    SearchInputContainer
 } from './containers';
-
 import { fetchPostsIfNeeded } from '../actions/actions'
 
 export class AppContainer extends React.Component {
@@ -31,7 +31,7 @@ export class AppContainer extends React.Component {
 
         const {store} = this.context;
         let subreddit = store.getState().selectedSubreddit;
-        let isFetching = store.getState().posts[subreddit].isFetching;
+        let isFetching = store.getState().posts.get(subreddit).isFetching;
         let className = isFetching ? 'loader': '';
 
         return (
@@ -39,6 +39,7 @@ export class AppContainer extends React.Component {
                 <AddTabContainer />
                 <TabFilterContainer />
                 <SubredditFilterContainer />
+                <SearchInputContainer />
                 <InteractiveTabList />
             </div>
         )
