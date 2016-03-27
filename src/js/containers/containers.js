@@ -5,6 +5,8 @@ import { AddTab } from '../components/AddTab';
 import { Select } from '../components/Select';
 import { TabList } from '../components/TabList';
 import { SearchInput } from '../components/SearchInput';
+import { Counter } from '../components/Counter';
+import { UserMenu } from '../components/UserMenu';
 import {
     toggleTabAction,
     removeTabAction,
@@ -125,3 +127,16 @@ export const SubredditFilterContainer = connect(
     mapSelSubredditStateToProps,
     mapSelSubredditDispatchToProps
 )(Select);
+
+// Counter
+const mapCounterStateToProps = (state) => {
+    return {
+        count: state.posts.getIn([state.selectedSubreddit, 'items']) ? state.posts.getIn([state.selectedSubreddit, 'items']).size : 0
+    }
+};
+
+export const CounterContainer = connect(
+    mapCounterStateToProps
+)(Counter);
+
+export const UserMenuBar = connect()(UserMenu);

@@ -1,12 +1,6 @@
 import React, { PropTypes } from 'react';
-import {
-    AddTabContainer,
-    TabFilterContainer,
-    InteractiveTabList,
-    SubredditFilterContainer,
-    SearchInputContainer
-} from './containers';
-import { fetchPostsIfNeeded } from '../actions/actions'
+import { InteractiveTabList, UserMenuBar } from './containers';
+import { fetchPostsIfNeeded } from '../actions/actions';
 
 export class AppContainer extends React.Component {
 
@@ -31,15 +25,12 @@ export class AppContainer extends React.Component {
 
         const {store} = this.context;
         let subreddit = store.getState().selectedSubreddit;
-        let isFetching = store.getState().posts.get(subreddit).isFetching;
+        let isFetching = store.getState().posts.get(subreddit).get('isFetching');
         let className = isFetching ? 'loader': '';
 
         return (
             <div className={className}>
-                <AddTabContainer />
-                <TabFilterContainer />
-                <SubredditFilterContainer />
-                <SearchInputContainer />
+                <UserMenuBar />
                 <InteractiveTabList />
             </div>
         )
