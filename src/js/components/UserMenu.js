@@ -1,22 +1,22 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {
     AddTabContainer,
     TabFilterContainer,
-    InteractiveTabList,
     SubredditFilterContainer,
-    SearchInputContainer,
-    CounterContainer
-} from '../containers/containers';
+    SearchContainer,
+    CounterContainer,
+} from '../containers/index';
 
-export const UserMenu = () => {
+let UserMenu = () => {
 
     return (
         <div>
             <AddTabContainer />
             <TabFilterContainer />
             <SubredditFilterContainer />
-            <SearchInputContainer />
+            <SearchContainer />
             <ReactCSSTransitionGroup
                 transitionName="example"
                 transitionEnterTimeout={5500}
@@ -29,3 +29,5 @@ export const UserMenu = () => {
         </div>
     );
 };
+
+export default connect()(UserMenu);

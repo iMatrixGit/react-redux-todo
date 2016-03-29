@@ -1,18 +1,15 @@
 import React, { PropTypes } from 'react';
-import { InteractiveTab } from '../containers/containers';
+import TabContainer from '../containers/TabContainer';
 import Immutable from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-//import { ReactCSSTransitionGroup } from 'react-addons-css-transition-group';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
-console.log(ReactCSSTransitionGroup);
 
 export const TabList = ({
     tabs
     }) => {
 
     let items = tabs.map((tab, index) => (
-        <InteractiveTab
+        <TabContainer
             key={index}
             id={tab.get('id')}
             title={tab.get('title')}
@@ -30,7 +27,6 @@ export const TabList = ({
                 transitionLeaveTimeout={300}>
                 {items}
             </ReactCSSTransitionGroup>
-
         </div>
     )
 };

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { InteractiveTabList, UserMenuBar } from './containers';
+import UserMenu from '../components/UserMenu';
+import TabListContainer from './TabListContainer';
 import { fetchPostsIfNeeded } from '../actions/actions';
 
 export class AppContainer extends React.Component {
@@ -30,8 +31,8 @@ export class AppContainer extends React.Component {
 
         return (
             <div className={className}>
-                <UserMenuBar />
-                <InteractiveTabList />
+                <UserMenu />
+                <TabListContainer />
             </div>
         )
     }
