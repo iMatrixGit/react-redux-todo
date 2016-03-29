@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
-import { addTabIfValid } from '../actions/actions'
 
 export const AddTab = ({
-    dispatch
+    addTab
     }) => {
 
     let inputTitle, inputContent;
@@ -28,7 +27,7 @@ export const AddTab = ({
                 type="button"
                 className="form-submit"
                 onClick={() => {
-                dispatch(addTabIfValid(inputTitle.value, inputContent.value));
+                addTab(inputTitle.value, inputContent.value);
                 inputTitle.value = '';
                 inputContent.value = '';
             }}>

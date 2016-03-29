@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import UserMenu from '../components/UserMenu';
-import TabListContainer from './TabListContainer';
+import UserMenu from './UserMenu';
+import TabList from './TabList';
 import { fetchPostsIfNeeded } from '../actions/actions';
 
 export class AppContainer extends React.Component {
@@ -32,7 +32,7 @@ export class AppContainer extends React.Component {
         return (
             <div className={className}>
                 <UserMenu />
-                <TabListContainer />
+                <TabList />
             </div>
         )
     }

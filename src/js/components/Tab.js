@@ -7,16 +7,16 @@ export const Tab = ({
     title,
     content,
     active,
-    handleTabOpen,
-    handleRemoveTab
+    toggleTab,
+    removeTab
     }) => {
 
     let tabContent = active ? <div className="tab-content">{content}</div> : '';
 
     return (
         <div className="tab">
-            <TabHeading title={title} onClick={() => handleTabOpen(id)} />
-            <RemTabBtn onClick={() => handleRemoveTab(id)} />
+            <TabHeading title={title} onClick={() => toggleTab(id)} />
+            <RemTabBtn onClick={() => removeTab(id)} />
             {tabContent}
         </div>
     );

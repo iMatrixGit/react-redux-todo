@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Immutable from 'immutable';
 
-export const Select = ({
+export const SelectInput = ({
     activeOption,
     options,
     onChange
@@ -26,7 +26,7 @@ export const Select = ({
     )
 };
 
-Select.propTypes = {
+SelectInput.propTypes = {
     activeOption: PropTypes.string.isRequired,
     options: PropTypes.instanceOf(Immutable.List),
     onChange: PropTypes.func.isRequired
