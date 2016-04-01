@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
+import { pure } from 'recompose';
 
-export const RemTabBtn = ({
+const RemTabBtn = ({
     onClick
     }) => {
     return (
@@ -14,3 +15,5 @@ export const RemTabBtn = ({
 RemTabBtn.propTypes = {
     onClick: PropTypes.func.isRequired
 };
+
+export default pure(RemTabBtn);

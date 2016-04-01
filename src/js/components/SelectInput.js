@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import Immutable from 'immutable';
+import { pure } from 'recompose';
 
-export const SelectInput = ({
+const SelectInput = ({
     activeOption,
     options,
     onChange
@@ -31,3 +32,5 @@ SelectInput.propTypes = {
     options: PropTypes.instanceOf(Immutable.List),
     onChange: PropTypes.func.isRequired
 };
+
+export default pure(SelectInput);

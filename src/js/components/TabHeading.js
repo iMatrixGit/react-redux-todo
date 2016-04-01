@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
+import { pure } from 'recompose';
 
-export const TabHeading = ({
+const TabHeading = ({
     title,
     onClick
     }) => {
@@ -20,3 +21,5 @@ export const TabHeading = ({
 TabHeading.propTypes = {
     title: PropTypes.string.isRequired
 };
+
+export default pure(TabHeading);

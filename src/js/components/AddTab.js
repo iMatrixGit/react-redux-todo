@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
+import { pure } from 'recompose'
 
-export const AddTab = ({
+const AddTab = ({
     addTab
     }) => {
 
@@ -37,3 +38,5 @@ export const AddTab = ({
     )
 
 };
+
+export default pure(AddTab);

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import { TabHeading } from './TabHeading';
-import { RemTabBtn } from './RemTabBtn';
+import TabHeading from './TabHeading';
+import RemTabBtn from './RemTabBtn';
 import { pure } from 'recompose';
 
 let Tab = ({

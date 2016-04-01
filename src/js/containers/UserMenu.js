@@ -4,13 +4,15 @@ import { bindActionCreators } from 'redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Counter from '../components/Counter';
 import SearchInputContainer from './SearchInputContainer';
-import { AddTab } from '../components/AddTab';
-import { SelectInput } from '../components/SelectInput';
+import AddTab from '../components/AddTab';
+import SelectInput from '../components/SelectInput';
 import {
     searchPostAction,
     fetchPostsIfNeeded,
     changeFilterAction,
     addTabIfValid } from '../actions/actions';
+
+console.log(SelectInput);
 
 let UserMenu = ({
         tabs,
