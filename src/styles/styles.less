@@ -9,6 +9,7 @@ html, body {
 
 * {
     box-sizing: border-box;
+    outline: none;
 }
 
 .add-tab-menu {
@@ -51,6 +52,15 @@ html, body {
     border-radius: 5px;
     margin: 0 10px;
     padding: 15px;
+}
+
+.search-input {
+    width: 200px;
+    transition: width .2s cubic-bezier(0, 0, 0.24, 1.01);
+}
+
+.search-input.active {
+    width: 300px;
 }
 
 .form-submit {

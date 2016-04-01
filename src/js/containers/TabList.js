@@ -18,7 +18,7 @@ export const TabList = ({
     let items = tabs.map((tab, index) => {
 
         let active = tab.get('active');
-        let tabContent = <Collapse isOpened={active}>
+        let tabContent = <Collapse isOpened={active} springConfig={{stiffness: 210}}>
                             <div className="tab-content">{tab.get('content')}</div>
                         </Collapse>;
 

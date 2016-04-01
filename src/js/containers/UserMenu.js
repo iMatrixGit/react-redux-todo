@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { Counter } from '../components/Counter';
-import { SearchInput } from '../components/SearchInput';
+import Counter from '../components/Counter';
+import SearchInputContainer from './SearchInputContainer';
 import { AddTab } from '../components/AddTab';
 import { SelectInput } from '../components/SelectInput';
 import {
@@ -39,7 +39,7 @@ let UserMenu = ({
                 options={subreddits}
                 onChange={fetchPostsIfNeeded}
             />
-            <SearchInput filterText={filterText} onChange={searchPostAction} />
+            <SearchInputContainer filterText={filterText} onChange={searchPostAction} />
             <ReactCSSTransitionGroup
                 transitionName="example"
                 transitionEnterTimeout={5500}

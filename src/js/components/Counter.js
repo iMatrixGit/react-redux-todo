@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
+import { pure } from 'recompose';
 
-export const Counter = ({
+const Counter = ({
     count
 }) => {
 
@@ -14,3 +15,5 @@ export const Counter = ({
 Counter.propTypes = {
     count: PropTypes.number
 };
+
+export default pure(Counter);

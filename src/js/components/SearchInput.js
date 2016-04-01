@@ -1,8 +1,12 @@
 import React, { PropTypes } from 'react';
+import { pure } from 'recompose';
 
 export const SearchInput = ({
     filterText,
-    onChange
+    onChange,
+    classList,
+    onFocus,
+    onBlur
     }) => {
 
     let input;
@@ -13,8 +17,10 @@ export const SearchInput = ({
             type="text"
             value={filterText}
             placeholder="Search post"
-            className="form-input"
+            className={'form-input search-input ' + classList }
             onChange={() => onChange(input.value)}
+            onFocus={(e) => onFocus(e)}
+            onBlur={(e) => onBlur(e)}
         />
     );
 };
