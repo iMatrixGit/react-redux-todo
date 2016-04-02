@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
+var ws = require('nodejs-websocket');
 
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
@@ -13,3 +14,19 @@ new WebpackDevServer(webpack(config), {
 
     console.log('Listening at http://localhost:8080/');
 });
+
+var connections = [];
+
+var server = ws.createServer(function (conn) {
+    console.log("New connection");
+    connections.push(conn);
+    conn.on("text", function (str) {
+        console.log("Received "+str);
+        connections.forEach((item) => {
+            item.sendText(str.toUpperCase()+"!!!" + "Connections:" + connections.length);
+        })
+    });
+    conn.on("close", function (code, reason) {
+        console.log("Connection closed")
+    })
+}).listen(8001);
