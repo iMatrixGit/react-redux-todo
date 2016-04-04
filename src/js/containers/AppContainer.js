@@ -5,12 +5,6 @@ import { fetchPostsIfNeeded } from '../actions/actions';
 
 export class AppContainer extends React.Component {
 
-    componentWillMount(){
-        console.log("WillMount");
-        const {store} = this.context;
-        store.dispatch(fetchPostsIfNeeded('backend'));
-    }
-
     componentDidMount(){
         const {store} = this.context;
         this.unsubscribe = store.subscribe(() => {

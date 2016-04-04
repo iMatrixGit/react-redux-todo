@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import Immutable from 'immutable';
 import { mainReducer } from './reducers/reducers';
 import { logger } from './actions/actions';
@@ -36,7 +38,8 @@ let initialState = {
             didInvalidate: false,
             items: Immutable.List()
         })
-    })
+    }),
+    routing: routerReducer
 };
 
 function configureStore(initialState, reducer, ...middlewares) {
@@ -49,12 +52,16 @@ function configureStore(initialState, reducer, ...middlewares) {
 // App
 
 const store = configureStore(initialState, mainReducer, logger, thunk);
+const history = syncHistoryWithStore(browserHistory, store);
 
 Perf.start();
 
 ReactDOM.render(
     <Provider store={store}>
-        <AppContainer />
+        <Router history={history}>
+            <Route path="/" component={AppContainer}>
+            </Route>
+        </Router>
     </Provider>,
     document.getElementById('app')
 );

@@ -5,14 +5,17 @@ import Tab from '../components/Tab';
 import Immutable from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { toggleTabAction, removeTabAction } from '../actions/actions';
+import { toggleTabAction, removeTabAction, fetchPosts } from '../actions/actions';
 import { getItemsByFilterText, getItemsByFilter } from '../reducers/reducers';
 import Collapse from 'react-collapse';
+import Waypoint from 'react-waypoint';
 
 export const TabList = ({
     tabs,
     toggleTabAction,
     removeTabAction,
+    fetchPosts,
+    selectedSubreddit,
     }) => {
 
     let items = tabs.map((tab, index) => {
@@ -33,8 +36,7 @@ export const TabList = ({
                 removeTab={removeTabAction}
             />
         );
-    });
-
+    }).reverse();
 
     return (
 
@@ -44,6 +46,13 @@ export const TabList = ({
                 transitionEnterTimeout={500}
                 transitionLeaveTimeout={300}>
                 {items}
+                <Waypoint
+                    onEnter={() => {
+                        console.log("Enter way point!");
+                        fetchPosts(selectedSubreddit);
+                        }}
+                    onLeave={() => console.log("Leave way point!")}
+                />
             </ReactCSSTransitionGroup>
         </div>
     )
@@ -72,12 +81,14 @@ export default connect(
                 state.posts.getIn([state.selectedSubreddit, 'items']),
                 state.visibilityFilter),
             state.filterText
-        )
+        ),
+        selectedSubreddit: state.selectedSubreddit
     }),
 
     dispatch => bindActionCreators({
         toggleTabAction,
-        removeTabAction
+        removeTabAction,
+        fetchPosts
     }, dispatch)
 )(TabList);
 
