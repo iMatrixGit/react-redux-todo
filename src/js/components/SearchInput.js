@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { pure } from 'recompose';
 
-export const SearchInput = ({
+const SearchInput = ({
     filterText,
     onChange,
     classList,
@@ -29,3 +29,5 @@ SearchInput.propTypes = {
     filterText: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired
 };
+
+export default pure(SearchInput);

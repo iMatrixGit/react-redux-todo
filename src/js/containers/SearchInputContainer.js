@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { pure } from 'recompose';
-import { SearchInput } from '../components/SearchInput';
+import { SearchInput } from '../components/index';
 
 class SearchInputContainer extends React.Component {
 
