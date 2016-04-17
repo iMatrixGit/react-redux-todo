@@ -144,6 +144,11 @@ html, body {
     line-height: 20px;
     color: #fff;
     transform: scale(1);
+    transition: transform 100ms cubic-bezier(0, 0, 0.24, 1.01);
+
+    &.active {
+        transform: scale(1.2);
+    }
 }
 
 .example-enter {
